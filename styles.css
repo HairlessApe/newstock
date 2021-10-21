@@ -1,0 +1,20 @@
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+body {
+  background-color: #a4b99f;
+  font-family: "Courier Prime", monospace;
+}
+h1 {
+  text-align: center;
+}
+p {
+  text-align: center;
+}
+div {
+  text-align: center;
+}
