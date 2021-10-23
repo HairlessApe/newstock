@@ -1,12 +1,22 @@
-"strict";
-import { state } from "./model";
-import { markup } from "./view";
-import { TimeSeries5min } from "./model";
-import view from "./view";
-import { loadStock } from "./model";
+import View from "./view";
 import { apiCALL } from "./model";
+// const stockContainer = document.querySelector(".list").append(markup);
 
-const stockContainer = document.querySelector(".list").append(markup);
-loadStock();
-apiCALL();
-generateMarkup();
+export function whenClickButton() {
+  apiCALL().then((data) => {
+    const view = new View();
+    view.render(data);
+  });
+}
+
+window.onload = () =>
+  document
+    .getElementById("myBtn")
+    .addEventListener("click", function whenClickButton(event) {
+      event.preventDefault();
+      apiCALL().then((data) => {
+        const view = new View();
+        view.render(data);
+      });
+      console.log("muie");
+    });

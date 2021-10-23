@@ -14,10 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <div></div>
-    <script defer="" type="module" src="./js/controller.js"></script>
+    <script type="module">
+      import { whenCLickButton } from "./js/controller.js";
+    </script>
   </head>
-  <header></header>
   <body>
     <div class="container"></div>
 
@@ -25,28 +25,24 @@
     <p>Here you will be able to check the differences in value of a stock</p>
     <div><h3>Please insert in the box bellow the name of the stock</h3></div>
     <div>
-      <form action="apiCALL">
+      <form>
         <input
           type="text"
           id="Stock name"
           name="Stock name "
           placeholder="Insert here"
           value=""
-          <input
-          type="submit"
-          value="Submit"
         />
+        <div>
+          <button id="myBtn">Check Stock!</button>
+        </div>
       </form>
     </div>
-    <div><button type="submit">Check Stock!</button></div>
     <div><h4>Check responses below !</h4></div>
-    <container>
-    <div class="list">
-       </container>
-    </div>
+
+    <div class="list"></div>
 
     <img src="stock.jpg" alt="stockproject" width="1000" height="400" />
+    <footer>Copywrite by Ivascu Angelo aka HairlessApe</footer>
   </body>
-
-  <footer>Copywrite by Ivascu Angelo aka HairlessApe</footer>
 </html>

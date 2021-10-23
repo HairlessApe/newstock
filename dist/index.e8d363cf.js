@@ -460,16 +460,95 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"jrv7n":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _model = require("./model");
+parcelHelpers.defineInteropFlag(exports);
+// const stockContainer = document.querySelector(".list").append(markup);
+parcelHelpers.export(exports, "whenClickButton", ()=>whenClickButton
+);
 var _view = require("./view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
-"strict";
-const stockContainer = document.querySelector(".list").append(_view.markup);
-_model.loadStock();
-_model.apiCALL();
-generateMarkup();
+var _model = require("./model");
+function whenClickButton() {
+    _model.apiCALL().then((data)=>{
+        const view = new _viewDefault.default();
+        view.render(data);
+    });
+}
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./view":"9gMGv","./model":"l19vq"}],"ciiiV":[function(require,module,exports) {
+},{"./model":"l19vq","./view":"9gMGv","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"l19vq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state
+);
+parcelHelpers.export(exports, "apiCALL", ()=>apiCALL
+);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+const state = {
+    MetaData: {
+    },
+    TimeSeries5min: {
+    }
+};
+const apiCALL = async function() {
+    //SENDING THE PROMISE
+    try {
+        const response = await fetch("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=5KL2KZKMG764VZZL");
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (err) {
+        alert(err);
+        return null;
+    }
+}; //Loading THE PROMISE
+ // export const loadStock = async function (data) {
+ //   let timeSeries5min = data["Time Series (5min)"];
+ //   return timeSeries5min;
+ //   // state.TimeSeries5min = {
+ //   //   open: TimeSeries5min.open,
+ //   //   high: TimeSeries5min.hign,
+ //   //   low: TimeSeries5min.low,
+ //   //   close: TimeSeries5min.close,
+ //   //   volume: TimeSeries5min.volume,
+ //   // };
+ //
+
+},{"./view":"9gMGv","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"9gMGv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class View {
+    parentElement = document.querySelector(".list");
+    data;
+    render(data) {
+        this.data = data;
+        console.log(this.data);
+        const markup = this.generateMarkup(this.data);
+        this.parentElement.innerHTML = "";
+        this.parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    generateMarkup(timeSeries5min) {
+        let emptyString = "";
+        for (const [key, value] of Object.entries(timeSeries5min["Time Series (5min)"])){
+            console.log("key", key);
+            console.log("value", value);
+            emptyString += ` 
+      
+    ${key}
+      <ol>
+      
+       <li>OPEN:  ${value["1. open"]}</li>
+      <li>HIGN:  ${value["2. high"]}</li>
+      <li>LOW:  ${value["3. low"]}</li>
+      <li>CLOSE:  ${value["4. close"]}</li>
+      <li>VOLUME:  ${value["5. volume"]}</li>
+       </ol>`;
+        }
+        return emptyString;
+    }
+} // key is the date or DATA and value is open high so on
+exports.default = View;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -499,90 +578,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"9gMGv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _model = require("./model");
-var _modelDefault = parcelHelpers.interopDefault(_model);
-class View {
-    #parentElement = document.querySelector(".list");
-    #data;
-    render(data) {
-        this.#data = data;
-        const markup = this.generateMarkup();
-        if (!render) return markup;
-        Stockcontainer.innerHTML = '';
-        Stockcontainer.insertAdjacentHTML('afterbegin', markup);
-    }
-    generateMarkup() {
-        return `  <ol>
-        <li> Open:${_modelDefault.default.open}</li>
-        <li>High:${_modelDefault.default.high}</li>
-        <li>Low:${_modelDefault.default.low}</li>
-        <li>Close:${_modelDefault.default.close}<li>
-        <li>Volume:${_modelDefault.default.volume}<li>
-         </ol>`;
-    }
-}
-exports.default = View;
-exports.default = new View(); //USE FOR IN LOOP ON THE RENDER//
- // render(data, render = true) {
- //     if (!data || (Array.isArray(data) && data.length === 0))
- //       return this.renderError();
- //     this._data = data;
- //     const markup = this._generateMarkup();
- //     if (!render) return markup;
- //     this._clear();
- //     this._parentElement.insertAdjacentHTML('afterbegin', markup);
- //   }
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./model":"l19vq"}],"l19vq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "state", ()=>state
-);
-parcelHelpers.export(exports, "apiCALL", ()=>apiCALL
-);
-parcelHelpers.export(exports, "loadStock", ()=>loadStock
-);
-const state = {
-    TimeSeries5min: {
-    }
-};
-const apiCALL = async function() {
-    let data;
-    //SENDING THE PROMISE
-    try {
-        const response = await fetch("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=5KL2KZKMG764VZZL");
-        if (!response.ok) throw new Error(`${data.message} ${response.status}`);
-        console.log(data, response);
-        const storeStockData = function(stock) {
-            fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stock}&interval=5min&apikey=5KL2KZKMG764VZZL`).then(function(response) {
-                console.log(response);
-                response.json();
-            // model.loadStock(stock);
-            });
-        };
-        storeStockData("TSLA");
-        console.log(markup);
-    } catch (err) {
-        alert(err);
-    }
-};
-const loadStock = async function() {
-    const response = await fetch("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=5KL2KZKMG764VZZL");
-    data = await response.json();
-    if (!response.ok) throw new Error(`${data.message} ${response.status}`);
-    let TimeSeries5min = data["Time Series (5min)"];
-    state.TimeSeries5min = {
-        open: TimeSeries5min.open,
-        high: TimeSeries5min.hign,
-        low: TimeSeries5min.low,
-        close: TimeSeries5min.close,
-        volume: TimeSeries5min.volume
-    };
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}]},["yneY7","jrv7n"], "jrv7n", "parcelRequire5c68")
+},{}]},["yneY7","jrv7n"], "jrv7n", "parcelRequire5c68")
 
 //# sourceMappingURL=index.e8d363cf.js.map
