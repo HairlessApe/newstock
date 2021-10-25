@@ -1,16 +1,16 @@
 import View from "./view";
+import { whenClickButton } from "./controller";
 export const state = {
   MetaData: {},
   TimeSeries5min: {},
-
-  //ENDER HERE OBJECT !  AND OBJECT 2
 };
 
-export const apiCALL = async function () {
+export const apiCALL = async function (input) {
   //SENDING THE PROMISE
   try {
     const response = await fetch(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=5KL2KZKMG764VZZL"
+      `      https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${input}&interval=5min&apikey=5KL2KZKMG764VZZL
+`
     );
     const data = await response.json();
 

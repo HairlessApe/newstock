@@ -4,6 +4,7 @@ footer {
   bottom: 0;
   width: 100%;
   text-align: center;
+  background-color: royalblue;
 }
 body {
   background-color: #a4b99f;
@@ -21,4 +22,21 @@ div {
 
 body {
   text-align: center;
+}
+
+.maxNumber {
+  background-color: rgb(9, 100, 32);
+}
+
+.minNumber {
+  background-color: red;
+}
+ol {
+  list-style-position: inside;
+
+  text-align: center;
+}
+li {
+  text-align: center;
+  list-style-position: inside;
 }

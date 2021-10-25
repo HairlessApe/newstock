@@ -11,26 +11,57 @@ export default class View {
   }
 
   generateMarkup(timeSeries5min) {
+    const maxNumber = Math.max(
+      ...Object.values(timeSeries5min["Time Series (5min)"]).map(
+        (l) => +l["2. high"]
+      )
+    );
+    const minNumber = Math.min(
+      ...Object.values(timeSeries5min["Time Series (5min)"]).map(
+        (l) => +l["3. low"]
+      )
+    );
+    console.log(minNumber);
+    console.log(maxNumber);
+
     let emptyString = "";
 
     for (const [key, value] of Object.entries(
       timeSeries5min["Time Series (5min)"]
     )) {
-      console.log("key", key);
-      console.log("value", value);
+      // const isLargeNumber = (value) =>
+      //   value["2. high"] === maxNumber.IndexOf(maxNumber);
+      // const isLowNumber = (value) =>
+      //   value["3. low"] === minNumber.IndexOf(minNumber);
+
+      // console.log(isLargeNumber(value));
+      // console.log(isLowNumber(value));
       emptyString += ` 
-      
     ${key}
-      <ol>
+    
+      <ol class="center">
       
        <li>OPEN:  ${value["1. open"]}</li>
-      <li>HIGN:  ${value["2. high"]}</li>
-      <li>LOW:  ${value["3. low"]}</li>
+      <li ${
+        +value["2. high"] === maxNumber ? 'class="maxNumber"' : ""
+      }>HIGN:  ${value["2. high"]}</li>
+      <li ${+value["3. low"] === minNumber ? 'class="minNumber"' : ""}>LOW:  ${
+        value["3. low"]
+      }</li>
       <li>CLOSE:  ${value["4. close"]}</li>
       <li>VOLUME:  ${value["5. volume"]}</li>
        </ol>`;
     }
+    console.log(maxNumber);
     return emptyString;
   }
 }
-// key is the date or DATA and value is open high so on
+// const object = { a: 2, b: 4, c: 6, d: 8 };
+
+// for (const [index, [key, value]] of Object.entries(Object.entries(object))) {
+//   console.log(`${index}: ${key} = ${value}`);
+// }
+
+// Object.entries(object).forEach(([key, value], index) => {
+//   console.log(`${index}: ${key} = ${value}`);
+// });
