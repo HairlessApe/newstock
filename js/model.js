@@ -2,9 +2,8 @@ import View from "./view";
 import { whenClickButton } from "./controller";
 export const state = {
   MetaData: {},
-  TimeSeries5min: {},
+  ObiectuTimes: {},
 };
-
 export const apiCALL = async function (input) {
   //SENDING THE PROMISE
   try {
@@ -21,15 +20,3 @@ export const apiCALL = async function (input) {
     return null;
   }
 };
-//Loading THE PROMISE
-// export const loadStock = async function (data) {
-//   let timeSeries5min = data["Time Series (5min)"];
-//   return timeSeries5min;
-//   // state.TimeSeries5min = {
-//   //   open: TimeSeries5min.open,
-//   //   high: TimeSeries5min.hign,
-//   //   low: TimeSeries5min.low,
-//   //   close: TimeSeries5min.close,
-//   //   volume: TimeSeries5min.volume,
-//   // };
-//

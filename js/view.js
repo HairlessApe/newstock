@@ -1,3 +1,58 @@
+import {
+  Chart,
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip,
+  SubTitle,
+} from "chart.js";
+
+Chart.register(
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip,
+  SubTitle
+);
+
 export default class View {
   parentElement = document.querySelector(".list");
   data;
@@ -21,21 +76,47 @@ export default class View {
         (l) => +l["3. low"]
       )
     );
-    console.log(minNumber);
-    console.log(maxNumber);
+
+    const labels = Object.keys(timeSeries5min["Time Series (5min)"]).slice(
+      0,
+      5
+    );
+
+    const dataChart = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Stock Graphics",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [
+            Object.values(timeSeries5min["Time Series (5min)"]).map(
+              (l) => +l["2. high"]
+            ),
+          ],
+        },
+      ],
+    };
+    const config = {
+      type: "line",
+      data: dataChart,
+      options: {},
+    };
+
+    const ctx = document.getElementById("Mychart").getContext("2d");
+    const Chart = require("chart.js");
+    const stockChart = new Chart(ctx, {
+      type: config.type,
+      data: dataChart,
+    });
+    stockChart.render();
+    console.log(stockChart);
 
     let emptyString = "";
 
     for (const [key, value] of Object.entries(
       timeSeries5min["Time Series (5min)"]
     )) {
-      // const isLargeNumber = (value) =>
-      //   value["2. high"] === maxNumber.IndexOf(maxNumber);
-      // const isLowNumber = (value) =>
-      //   value["3. low"] === minNumber.IndexOf(minNumber);
-
-      // console.log(isLargeNumber(value));
-      // console.log(isLowNumber(value));
       emptyString += ` 
     ${key}
     
@@ -52,16 +133,7 @@ export default class View {
       <li>VOLUME:  ${value["5. volume"]}</li>
        </ol>`;
     }
-    console.log(maxNumber);
+
     return emptyString;
   }
 }
-// const object = { a: 2, b: 4, c: 6, d: 8 };
-
-// for (const [index, [key, value]] of Object.entries(Object.entries(object))) {
-//   console.log(`${index}: ${key} = ${value}`);
-// }
-
-// Object.entries(object).forEach(([key, value], index) => {
-//   console.log(`${index}: ${key} = ${value}`);
-// });
