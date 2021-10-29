@@ -53,9 +53,12 @@ Chart.register(
   SubTitle
 );
 
+import zoomPlugin from "chartjs-plugin-zoom";
+
 export default class View {
   parentElement = document.querySelector(".list");
   data;
+  chart;
 
   render(data) {
     this.data = data;
@@ -66,6 +69,10 @@ export default class View {
   }
 
   generateMarkup(timeSeries5min) {
+    console.log(this.chart);
+    if (this.chart) {
+      this.chart.destroy();
+    }
     const maxNumber = Math.max(
       ...Object.values(timeSeries5min["Time Series (5min)"]).map(
         (l) => +l["2. high"]
@@ -77,40 +84,75 @@ export default class View {
       )
     );
 
-    const labels = Object.keys(timeSeries5min["Time Series (5min)"]).slice(
-      0,
-      5
-    );
+    const labels = Object.keys(timeSeries5min["Time Series (5min)"]);
 
     const dataChart = {
       labels: labels,
       datasets: [
         {
           label: "Stock Graphics",
-          backgroundColor: "rgb(255, 99, 132)",
-          borderColor: "rgb(255, 99, 132)",
-          data: [
-            Object.values(timeSeries5min["Time Series (5min)"]).map(
-              (l) => +l["2. high"]
-            ),
-          ],
+          fill: false,
+          tension: 0.1,
+          backgroundColor: "rgb(255,255,255)",
+          borderColor: "rgb(0,100,0)  ",
+          data: Object.values(timeSeries5min["Time Series (5min)"]).map(
+            (l) => +l["2. high"]
+          ),
         },
       ],
     };
     const config = {
       type: "line",
       data: dataChart,
-      options: {},
     };
 
-    const ctx = document.getElementById("Mychart").getContext("2d");
-    const Chart = require("chart.js");
+    const ctx = document.getElementById("myChart").getContext("2d");
     const stockChart = new Chart(ctx, {
       type: config.type,
       data: dataChart,
+      options: {
+        plugins: {
+          zoom: {
+            pan: {
+              //PAN OPTIONS or events
+              enabled: true,
+              mode: "xy",
+              threshold: 10,
+            },
+            limits: {
+              //AXIS LIMITS
+            },
+            zoom: {
+              //ZOOM OPTIONS or events
+              wheel: {
+                enabled: true,
+                speed: 0.03,
+              },
+            },
+          },
+        },
+      },
     });
+
+    Chart.register(zoomPlugin);
+
     stockChart.render();
-    console.log(stockChart);
+
+    this.chart = stockChart;
+
+    const chartPosition = document.getElementById("myChart");
+    const mobileButton = document.getElementById("mobileButton");
+    console.log(mobileButton);
+    mobileButton.addEventListener("click", function Movesomewhere(event) {
+      event.preventDefault();
+      //ctx will not work
+      const chartPoz = chartPosition.getBoundingClientRect();
+      window.scrollTo({
+        left: chartPoz.left + window.pageXOffset,
+        top: chartPoz.top + window.pageYOffset,
+        behavior: "smooth",
+      });
+    });
 
     let emptyString = "";
 

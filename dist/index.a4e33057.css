@@ -40,8 +40,29 @@ li {
   text-align: center;
   list-style-position: inside;
 }
-canvas {
-  /* background-color: white; */
+.rightDiv {
+  float: right;
+
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 20px;
+
+  font-size: 20px;
+}
+
+#mobileButton {
+  background-color: rgb(218, 27, 27);
+  position: inherit;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.55);
+  color: white;
+  outline: none;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=index.a4e33057.css.map */

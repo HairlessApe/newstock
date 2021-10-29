@@ -1,16 +1,17 @@
 import View from "./view";
 import { apiCALL } from "./model";
-
+let view;
 export function whenClickButton() {
   apiCALL().then((data) => {
-    const view = new View();
-
     view.render(data);
   });
 }
 
-window.onload = () =>
+window.onload = () => {
+  view = new View();
+
   document
+
     .getElementById("myBtn")
     .addEventListener("click", function whenClickButton(event) {
       event.preventDefault();
@@ -20,9 +21,9 @@ window.onload = () =>
           console.log(input);
 
           apiCALL(input).then((data) => {
-            const view = new View();
             view.render(data);
           });
         }
       }
     });
+};
