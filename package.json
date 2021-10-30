@@ -1,0 +1,19 @@
+{
+  "name": "newproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Angelo",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^3.6.0",
+    "chartjs-plugin-zoom": "^1.1.1",
+    "material-design-icons": "^3.0.1",
+    "ngrok": "^4.2.2",
+    "parcel": "^2.0.0"
+  }
+}

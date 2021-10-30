@@ -1,0 +1,69 @@
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: royalblue;
+}
+body {
+  background-color: #a4b99f;
+  font-family: "Courier Prime", monospace;
+}
+h1 {
+  text-align: center;
+}
+p {
+  text-align: center;
+}
+div {
+  text-align: center;
+}
+
+body {
+  text-align: center;
+}
+
+.maxNumber {
+  background-color: rgb(9, 100, 32);
+}
+
+.minNumber {
+  background-color: red;
+}
+ol {
+  list-style-position: inside;
+
+  text-align: center;
+}
+li {
+  text-align: center;
+  list-style-position: inside;
+}
+.rightDiv {
+  float: right;
+
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 20px;
+
+  font-size: 20px;
+}
+
+#mobileButton {
+  background-color: rgb(218, 27, 27);
+  position: inherit;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.55);
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+.center {
+  text-align: left;
+}

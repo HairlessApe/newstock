@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>StockTracer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="module">
+      import { whenCLickButton } from "./js/controller.js";
+    </script>
+  </head>
+  <body>
+    <div class="container"></div>
+    <div class="rightDiv">
+      <button id="mobileButton" type="button">
+        <i class="material-icons">arrow_downward</i>
+      </button>
+    </div>
+    <header><h1>The best stock value tracer</h1></header>
+
+    <p>Here you will be able to check the differences in value of a stock</p>
+    <div><h3>Please insert in the box bellow the name of the stock</h3></div>
+    <div>
+      <form>
+        <input
+          type="text"
+          id="Stockname"
+          name="Stock name "
+          placeholder="Insert here"
+          value=""
+        />
+        <div>
+          <button id="myBtn" type="button">Check Stock!</button>
+        </div>
+      </form>
+    </div>
+    <div><h4>Check responses below !</h4></div>
+
+    <div class="list"></div>
+    <div>
+      <canvas id="myChart" width="600" height="400"></canvas>
+    </div>
+    <img src="stock.jpg" alt="stockproject" width="1000" height="400" />
+    <footer>Copywrite by Ivascu Angelo aka HairlessApe</footer>
+  </body>
+</html>
