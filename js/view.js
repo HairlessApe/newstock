@@ -84,8 +84,9 @@ export default class View {
       )
     );
 
-    const labels = Object.keys(timeSeries5min["Time Series (5min)"]);
-
+    const labels = Object.keys(timeSeries5min["Time Series (5min)"]).map((x) =>
+      x.slice(11, -3)
+    );
     const dataChart = {
       labels: labels,
       datasets: [
@@ -111,6 +112,7 @@ export default class View {
       type: config.type,
       data: dataChart,
       options: {
+        scales: {},
         plugins: {
           zoom: {
             pan: {
@@ -183,8 +185,9 @@ export default class View {
     for (const [key, value] of Object.entries(
       timeSeries5min["Time Series (5min)"]
     )) {
+      //  let key = key.substr
       emptyString += ` 
-    ${key}
+    ${key.substr(11)}
     
       <ol class="center">
       
